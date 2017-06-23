@@ -4,9 +4,13 @@ public class Robot {
 
 	private int x = 0;
 	private int y = 0;
-	private String orientation = "NORTH";
+	private orientation currentOrientation = orientation.NORTH;
 	private Boolean error = false;
 
+	public enum orientation {
+        NORTH, SOUTH, EAST, WEST
+    };
+	
 	private int getX() {
 		return x;
 	}
@@ -31,14 +35,14 @@ public class Robot {
 	private void setError(Boolean error) {
 		this.error = error;
 	}
-	private String getOrientation() {
-		return orientation;
+	private orientation getOrientation() {
+		return currentOrientation;
 	}
-	private void setOrientation(String orientation) {
-		this.orientation = orientation;
+	private void setOrientation(orientation currentOrientation) {
+		this.currentOrientation = currentOrientation;
 	}
 	public String getPosition() {
-		return "(" + this.getX() + ", " + this.getY() + ", " + this.getOrientation().charAt(0)+ ")";
+		return "(" + this.getX() + ", " + this.getY() + ", " + this.getOrientation().name().charAt(0)+ ")";
 	}
 	public void executeMovements(String movements) {
 
@@ -49,30 +53,30 @@ public class Robot {
 			// Rotate robot to the left side
 			case 'L':
 				switch (this.getOrientation()) {
-				case "NORTH": this.setOrientation("WEST"); break;
-				case "SOUTH": this.setOrientation("EAST"); break;
-				case "EAST": this.setOrientation("NORTH"); break;
-				case "WEST": this.setOrientation("SOUTH"); break;
+				case NORTH: this.setOrientation(orientation.WEST); break;
+				case SOUTH: this.setOrientation(orientation.EAST); break;
+				case EAST: this.setOrientation(orientation.NORTH); break;
+				case WEST: this.setOrientation(orientation.SOUTH); break;
 				}
 				break;
 
 			// Rotate robot to the right side
 			case 'R':
 				switch (this.getOrientation()) {
-				case "NORTH": this.setOrientation("EAST"); break;
-				case "SOUTH": this.setOrientation("WEST"); break;
-				case "EAST": this.setOrientation("SOUTH"); break;
-				case "WEST": this.setOrientation("NORTH"); break;
+				case NORTH: this.setOrientation(orientation.EAST); break;
+				case SOUTH: this.setOrientation(orientation.WEST); break;
+				case EAST: this.setOrientation(orientation.SOUTH); break;
+				case WEST: this.setOrientation(orientation.NORTH); break;
 				}
 				break;
 
 			// Move robot
 			case 'M':
 				switch (this.getOrientation()) {
-				case "NORTH": moveToNorth(); break;
-				case "SOUTH": moveToSouth(); break;
-				case "EAST": moveToEast(); break;
-				case "WEST": moveToWest(); break;
+				case NORTH: moveToNorth(); break;
+				case SOUTH: moveToSouth(); break;
+				case EAST: moveToEast(); break;
+				case WEST: moveToWest(); break;
 				}
 				break;
 
